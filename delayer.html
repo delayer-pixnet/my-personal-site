@@ -54,8 +54,13 @@
         class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
         <div class="container mx-auto px-6 h-16 flex items-center justify-between">
             <div>
-                <h1 class="text-xl font-bold text-gray-900 dark:text-white">delayer</h1>
-                <p class="text-xs text-primary-600 dark:text-primary-400 font-medium">資深程式分析師 / .NET 開發專家</p>
+                <a href="index.html" class="group">
+                    <h1
+                        class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                        delayer</h1>
+                </a>
+                <p class="text-xs text-primary-600 dark:text-primary-400 font-medium">資深程式分析師 / .NET <span
+                        class="dynamic-exp"></span>年開發經驗</p>
             </div>
 
             <!-- Desktop Nav -->
@@ -138,7 +143,7 @@
             </p>
             <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-up"
                 style="animation-delay: 0.3s;">
-                .NET <span id="exp-years" class="font-bold text-white"></span> 年開發經驗，擁有豐富的政府專案與大型系統開發經歷。<br>
+                .NET <span class="dynamic-exp font-bold text-white"></span> 年開發經驗，擁有豐富的政府專案與大型系統開發經歷。<br>
                 專精 C#、SQL 與 .NET 架構，專注於構建高可靠性的企業級解決方案。
             </p>
             <!-- Skill Badges -->
@@ -758,8 +763,13 @@
     <script>
             // 動態年資計算
             (function () {
-                var el = document.getElementById('exp-years');
-                if (el) { el.textContent = new Date().getFullYear() - 2010; }
+                var startYear = 2010;
+                var currentYear = new Date().getFullYear();
+                var exp = currentYear - startYear;
+                var elements = document.querySelectorAll('.dynamic-exp');
+                elements.forEach(function (el) {
+                    el.innerText = exp;
+                });
             })();
     </script>
 </body>

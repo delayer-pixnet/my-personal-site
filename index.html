@@ -145,7 +145,8 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-primary-300 transition-colors">
                         Delayer</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">資深程式分析師 / .NET 開發專家</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">資深程式分析師 / .NET <span
+                            class="dynamic-exp"></span>年開發經驗</p>
                     <div class="mt-6 flex flex-wrap gap-2">
                         <span
                             class="px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-xs font-mono">C#</span>
@@ -202,28 +203,37 @@
     </footer>
 
     <script>
-        // Dark Mode Logic (force dark for landing)
-        document.documentElement.classList.add('dark');
+        // Dark Mode Logic
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check preference on load
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
             themeToggleLightIcon.classList.remove('hidden');
         } else {
+            document.documentElement.classList.remove('dark');
             themeToggleDarkIcon.classList.remove('hidden');
         }
+
         var themeToggleBtn = document.getElementById('theme-toggle');
+
         themeToggleBtn.addEventListener('click', function () {
+            // Toggle icons
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
+
+            // If is dark mode
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
             } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            }
+
+            // If not set yet
+            if (!localStorage.getItem('color-theme')) {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
@@ -233,6 +243,18 @@
                 }
             }
         });
+
+        // Dynamic Experience Year Calculation
+        (function () {
+            var startYear = 2010;
+            var currentYear = new Date().getFullYear();
+            var exp = currentYear - startYear;
+            var elements = document.querySelectorAll('.dynamic-exp');
+            elements.forEach(function (el) {
+                el.innerText = exp;
+                el.classList.add('font-bold', 'text-primary-400'); // Add some styling
+            });
+        })();
     </script>
 </body>
 
