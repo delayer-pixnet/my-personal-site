@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>delayer - 資深程式分析師 / .NET 開發專家</title>
+    <meta name="description" content="delayer - 資深程式分析師，擁有超過 15 年 C#、SQL 與政府大型系統開發經驗">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7', // main brand color
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header
+        class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">delayer</h1>
+                <p class="text-xs text-primary-600 dark:text-primary-400 font-medium">資深程式分析師 / .NET 開發專家</p>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">關於我</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">工作經歷</a>
+                <a href="#skills"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">技能</a>
+                <a href="#portfolio"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">作品集</a>
+                <a href="#contact"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">聯絡方式</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                    aria-label="Toggle Dark Mode">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-gray-500 dark:text-gray-400"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-gray-500 dark:text-gray-400"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 dark:text-gray-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+            <div class="px-6 py-4 space-y-4 flex flex-col">
+                <a href="#about"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">關於我</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">工作經歷</a>
+                <a href="#skills"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">技能</a>
+                <a href="#portfolio"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">作品集</a>
+                <a href="#contact"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">聯絡方式</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gray-900 dark:bg-gray-950">
+        <!-- Animated Grid Background -->
+        <div class="hero-grid-bg absolute inset-0 opacity-20"></div>
+        <!-- Radial Glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(2,132,199,0.15)_0%,_transparent_70%)]">
+        </div>
+        <!-- Floating Particles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" id="hero-particles"></div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <!-- Name -->
+            <p class="text-primary-400 font-mono text-sm tracking-widest mb-4 uppercase animate-fade-in">Hello, I'm</p>
+            <h2 class="text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in-up">delayer</h2>
+            <!-- Tagline -->
+            <p class="text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-300 mb-6 animate-fade-in-up"
+                style="animation-delay: 0.15s;">
+                從客服到系統分析師的完整技術歷程
+            </p>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-up"
+                style="animation-delay: 0.3s;">
+                .NET <span id="exp-years" class="font-bold text-white"></span> 年開發經驗，擁有豐富的政府專案與大型系統開發經歷。<br>
+                專精 C#、SQL 與 .NET 架構，專注於構建高可靠性的企業級解決方案。
+            </p>
+            <!-- Skill Badges -->
+            <div class="flex flex-wrap justify-center gap-3 animate-fade-in-up" style="animation-delay: 0.45s;">
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">C#</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">SQL
+                    Server</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">.NET
+                    Framework</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">ASP.NET
+                    MVC</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">系統分析</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">需求設計</span>
+            </div>
+        </div>
+
+        <!-- Bottom Fade -->
+        <div
+            class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 dark:from-gray-950 to-transparent">
+        </div>
+    </section>
+
+    <!-- Core Strengths / Key Metrics -->
+    <section class="py-16 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6">
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto mb-12">
+
+                <!-- Stat 1: Years -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">15<span
+                            class="text-primary-500">+</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">年實戰經驗</p>
+                </div>
+
+                <!-- Stat 2: Uptime / Stability -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">99.9<span
+                            class="text-emerald-500">%</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">系統高穩定性</p>
+                </div>
+
+                <!-- Stat 3: Security -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-red-600 dark:text-red-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">A<span
+                            class="text-red-500">+</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">政府級資安標準</p>
+                </div>
+
+                <!-- Stat 4: Systems -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-violet-600 dark:text-violet-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">10<span
+                            class="text-violet-500">+</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">大型系統整合</p>
+                </div>
+
+            </div>
+
+            <!-- Government Client Badges -->
+            <div class="relative py-6 border-t border-gray-100 dark:border-gray-800">
+                <p
+                    class="text-center text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-5 font-mono">
+                    Trusted by Government Agencies</p>
+                <div class="flex items-center justify-center flex-wrap gap-x-4 gap-y-3 max-w-4xl mx-auto">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🏛️ 總統府
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        ⚖️ 監察院
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🌐 外交部
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        📊 國貿署
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🔥 災防中心
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🌿 環保署
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50 dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-6">
+                <p class="text-primary-600 dark:text-primary-400 font-mono text-sm tracking-widest uppercase mb-2">
+                    Career Journey</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">工作經歷</h3>
+            </div>
+            <p class="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-16 text-sm leading-relaxed">
+                從第一線客服出發，歷經系統工程、程式開發，最終成為核心系統分析師 —— 每一步都是紮實的技術積累。
+            </p>
+
+            <div class="relative max-w-3xl mx-auto">
+                <!-- Timeline Line (gradient to show growth) -->
+                <div
+                    class="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 via-primary-400 to-primary-600 dark:from-gray-700 dark:via-primary-600 dark:to-primary-400">
+                </div>
+
+                <!-- ========================================== -->
+                <!-- Timeline Item 1: 現在 - 叡揚資訊 (頂端，最新) -->
+                <!-- ========================================== -->
+                <div class="relative pl-16 md:pl-20 pb-14 group">
+                    <!-- Dot (active, pulsing) -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span class="flex h-5 w-5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                            <span
+                                class="relative inline-flex rounded-full h-5 w-5 bg-primary-600 border-4 border-white dark:border-gray-900"></span>
+                        </span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-primary-600 text-white text-xs font-bold tracking-wider">NOW</span>
+                    <!-- Card -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow-lg border border-primary-200 dark:border-primary-700/50 transition-all duration-300 hover:shadow-xl hover:border-primary-400 dark:hover:border-primary-500">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">叡揚資訊</h4>
+                                <p class="text-primary-600 dark:text-primary-400 font-semibold">程式分析師</p>
+                            </div>
+                            <span
+                                class="mt-2 sm:mt-0 inline-flex items-center px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                現職
+                            </span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                            專注於<strong class="text-gray-900 dark:text-white">需求分析</strong>與<strong
+                                class="text-gray-900 dark:text-white">系統設計</strong>，確保大型政府專案的穩定運行與功能高品質交付。主導多項跨部門關鍵系統的架構規劃。
+                        </p>
+                        <!-- Project Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-xs font-bold border border-red-200 dark:border-red-800/50">🔥
+                                災防中心</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs font-bold border border-blue-200 dark:border-blue-800/50">🌐
+                                外交部</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800/50">📊
+                                國貿署</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================================= -->
+                <!-- Timeline Item 2: 2010-2020 - 英福達科技 程式設計師 (核心，10年深耕highlight) -->
+                <!-- ========================================================================= -->
+                <div class="relative pl-16 md:pl-20 pb-14 group">
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span
+                            class="relative inline-flex rounded-full h-5 w-5 bg-primary-500 border-4 border-white dark:border-gray-900"></span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white text-xs font-bold tracking-wider">2010
+                        — 2020</span>
+                    <!-- Card with special accent for 10-year tenure -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl relative overflow-hidden">
+                        <!-- 10 Year Accent Ribbon -->
+                        <div
+                            class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-400 text-white text-xs font-bold px-4 py-1 rounded-bl-lg shadow-md">
+                            🏆 10 年深耕
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">英福達科技</h4>
+                            <p class="text-primary-600 dark:text-primary-400 font-semibold">程式設計師</p>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-2">
+                            累積整整 <strong class="text-gray-900 dark:text-white">10 年</strong> 的深度開發經驗。從前端 UI
+                            到後端核心邏輯一手包辦，完成從「客服 → 開發者」的技術轉型。
+                        </p>
+                        <ul class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 list-none space-y-1">
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>負責<strong
+                                    class="text-gray-900 dark:text-white">電子公文系統</strong>全面維護與功能擴展</li>
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>專精<strong
+                                    class="text-gray-900 dark:text-white">報表語法優化</strong>，大幅提升查詢效能</li>
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>UI /
+                                後端並進，提升系統穩定性與使用者體驗</li>
+                        </ul>
+                        <!-- Project Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-xs font-bold border border-green-200 dark:border-green-800/50">🌿
+                                環保署</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300 text-xs font-bold border border-violet-200 dark:border-violet-800/50">📄
+                                電子公文系統</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 text-xs font-bold border border-yellow-200 dark:border-yellow-800/50">⛽
+                                臺灣中油</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-xs font-bold border border-red-200 dark:border-red-800/50">🏛️
+                                總統府</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800/50">📋
+                                審計部</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-teal-50 dark:bg-teal-900/20 text-teal-700 dark:text-teal-300 text-xs font-bold border border-teal-200 dark:border-teal-800/50">🛃
+                                關務署</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-lime-50 dark:bg-lime-900/20 text-lime-700 dark:text-lime-300 text-xs font-bold border border-lime-200 dark:border-lime-800/50">🌍
+                                環境部</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 text-xs font-bold border border-sky-200 dark:border-sky-800/50">🌤️
+                                氣象署</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================= -->
+                <!-- Timeline Item 3: 2009-2010 - 系統工程師 (過渡) -->
+                <!-- ============================================= -->
+                <div class="relative pl-16 md:pl-20 pb-14 group">
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span
+                            class="relative inline-flex rounded-full h-4 w-4 bg-gray-400 dark:bg-gray-500 border-4 border-white dark:border-gray-900"></span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white text-xs font-bold tracking-wider">2009
+                        — 2010</span>
+                    <!-- Card -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg">
+                        <div class="mb-3">
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">英福達科技</h4>
+                            <p class="text-primary-600 dark:text-primary-400 font-semibold">系統工程師</p>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                            負責 <strong class="text-gray-900 dark:text-white">Server
+                                架設部署</strong>與環境建置，同時擔任客戶教育訓練講師。這段經歷讓我深入理解系統基礎設施，為後續的開發工作打下堅實底層知識。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">Server
+                                部署</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">教育訓練</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================= -->
+                <!-- Timeline Item 4: 2006-2009 - 客服人員 (起點) -->
+                <!-- ============================================= -->
+                <div class="relative pl-16 md:pl-20 group">
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span
+                            class="relative inline-flex rounded-full h-4 w-4 bg-gray-300 dark:bg-gray-600 border-4 border-white dark:border-gray-900"></span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white text-xs font-bold tracking-wider">2006
+                        — 2009</span>
+                    <!-- Card with "起點" callout -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg relative">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">英福達科技</h4>
+                                <p class="text-primary-600 dark:text-primary-400 font-semibold">客服人員</p>
+                            </div>
+                            <span
+                                class="mt-2 sm:mt-0 inline-flex items-center px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-xs font-semibold">
+                                🚀 職涯起點
+                            </span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                            第一線面對客戶，累積豐富的<strong class="text-gray-900 dark:text-white">溝通技巧</strong>與<strong
+                                class="text-gray-900 dark:text-white">現場問題解決能力</strong>。正是這段經歷讓我深刻理解使用者需求，成為日後進行系統分析的核心軟實力。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">客戶溝通</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">問題排除</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">需求理解</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-6">
+                <p class="text-primary-600 dark:text-primary-400 font-mono text-sm tracking-widest uppercase mb-2">
+                    Technical Expertise</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">專業技能</h3>
+            </div>
+            <p class="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-16 text-sm">
+                15 年以上的實戰累積，涵蓋後端開發、系統維運到跨部門溝通協作。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+                <!-- Category 1: 後端開發 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <!-- Icon -->
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">後端開發</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">Backend Development</p>
+
+                    <!-- Skill Bars -->
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">C#</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">95%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="95"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">SQL
+                                    Server</span><span class="text-xs text-gray-500 dark:text-gray-400">90%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">.NET
+                                    Framework</span><span class="text-xs text-gray-500 dark:text-gray-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">ASP.NET
+                                    MVC</span><span class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: 系統維運 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <!-- Icon -->
+                    <div
+                        class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">系統維運</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">System Operations</p>
+
+                    <!-- Skill Bars -->
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">Windows
+                                    Server</span><span class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">IIS 部署</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">環境建置與維護</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">80%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="80"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">CI/CD 流程</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">70%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: 溝通協作 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <!-- Icon -->
+                    <div
+                        class="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">溝通協作</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">Communication & Collaboration</p>
+
+                    <!-- Skill Bars -->
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">需求分析</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">95%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="95"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">客戶服務</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">90%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">跨部門協調</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">教育訓練</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">80%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-16">精選作品</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                <!-- Portfolio Item 1 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 dark:border-gray-800">
+                    <div class="h-48 bg-gray-200 dark:bg-gray-800 relative overflow-hidden group">
+                        <!-- Use generated image here, fallback to placeholder if not yet available, but assuming it will be renamed/moved correctly. 
+                             Using a relative path hoping the user moves the generated artifact or I do it. 
+                             For now, I will use a placeholder logic in case the image generation needs manual moving, 
+                             but I will reference 'assets/agency_search_thumbnail.png' assuming I will save it there. -->
+                        <img src="assets/agency_search_thumbnail.png" alt="機關地址簿搜尋系統"
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">機關地址簿搜尋</h4>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+                            展示即時搜尋與資料呈現能力的 Web 應用程式。
+                        </p>
+                        <a href="https://agency-search-gamma.vercel.app/" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors">
+                            查看專案
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h4 class="text-2xl font-bold mb-6">保持聯繫</h4>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Email</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> delayer. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+            // 動態年資計算
+            (function () {
+                var el = document.getElementById('exp-years');
+                if (el) { el.textContent = new Date().getFullYear() - 2010; }
+            })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFLEE - MIS 網管工程師 / 專案經理</title>
+    <meta name="description" content="CFLEE - MIS 網管工程師，擁有 15 年以上企業網路架構、SAP 導入與資安認證經驗">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header
+        class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+            <div>
+                <a href="index.html" class="group">
+                    <h1
+                        class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                        CFLEE</h1>
+                    <p class="text-xs text-primary-600 dark:text-primary-400 font-medium">MIS 網管工程師 / 專案經理</p>
+                </a>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">關於我</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">工作經歷</a>
+                <a href="#skills"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">技能</a>
+                <a href="#contact"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors">聯絡方式</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle"
+                    class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                    aria-label="Toggle Dark Mode">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-gray-500 dark:text-gray-400"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-gray-500 dark:text-gray-400"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600 dark:text-gray-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+            <div class="px-6 py-4 space-y-4 flex flex-col">
+                <a href="#about"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">關於我</a>
+                <a href="#experience"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">工作經歷</a>
+                <a href="#skills"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">技能</a>
+                <a href="#contact"
+                    class="text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400">聯絡方式</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-gray-900 dark:bg-gray-950">
+        <!-- Animated Grid Background -->
+        <div class="hero-grid-bg absolute inset-0 opacity-20"></div>
+        <!-- Radial Glow -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(16,185,129,0.15)_0%,_transparent_70%)]">
+        </div>
+        <!-- Floating Particles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" id="hero-particles"></div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <!-- Name -->
+            <p class="text-primary-400 font-mono text-sm tracking-widest mb-4 uppercase animate-fade-in">Hello, I'm</p>
+            <h2 class="text-5xl md:text-7xl font-bold text-white mb-4 animate-fade-in-up">CFLEE</h2>
+            <!-- Tagline -->
+            <p class="text-2xl md:text-3xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-emerald-300 mb-6 animate-fade-in-up"
+                style="animation-delay: 0.15s;">
+                MIS 網管工程師 / 專案經理
+            </p>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-in-up"
+                style="animation-delay: 0.3s;">
+                擁有 15 年以上 IT 經驗，專精於企業網路架構規劃 (Azure, Fortinet)、<br>
+                SAP 系統導入協助及資安認證 (TISAX)。善於跨部門溝通與問題解決。
+            </p>
+            <!-- Skill Badges -->
+            <div class="flex flex-wrap justify-center gap-3 animate-fade-in-up" style="animation-delay: 0.45s;">
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">Azure</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">Fortinet</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">SAP
+                    MM</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">TISAX</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">專案管理</span>
+                <span
+                    class="px-4 py-1.5 rounded-full border border-primary-500/30 bg-primary-500/10 text-primary-300 text-sm font-mono">網路管理</span>
+            </div>
+        </div>
+
+        <!-- Bottom Fade -->
+        <div
+            class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-50 dark:from-gray-950 to-transparent">
+        </div>
+    </section>
+
+    <!-- Core Strengths / Key Metrics -->
+    <section class="py-16 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6">
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto mb-12">
+
+                <!-- Stat 1: Years -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">15<span
+                            class="text-primary-500">+</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">年 IT 經驗</p>
+                </div>
+
+                <!-- Stat 2: Certifications -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">TISAX</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">資安認證通過</p>
+                </div>
+
+                <!-- Stat 3: SAP -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">SAP</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">MM 模組導入</p>
+                </div>
+
+                <!-- Stat 4: Network -->
+                <div class="text-center p-4">
+                    <div
+                        class="w-14 h-14 mx-auto mb-4 rounded-xl bg-violet-100 dark:bg-violet-900/30 flex items-center justify-center">
+                        <svg class="w-7 h-7 text-violet-600 dark:text-violet-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">5<span
+                            class="text-violet-500">+</span></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">企業網路架構</p>
+                </div>
+
+            </div>
+
+            <!-- Client Badges -->
+            <div class="relative py-6 border-t border-gray-100 dark:border-gray-800">
+                <p
+                    class="text-center text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-5 font-mono">
+                    Key Clients & Projects</p>
+                <div class="flex items-center justify-center flex-wrap gap-x-4 gap-y-3 max-w-4xl mx-auto">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🏛️ 總統府
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🌤️ 氣象局
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🚄 高鐵局
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        📖 國史館
+                    </span>
+                    <span
+                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-semibold">
+                        🏭 劍麟集團
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50 dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-6">
+                <p class="text-primary-600 dark:text-primary-400 font-mono text-sm tracking-widest uppercase mb-2">
+                    Career Journey</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">工作經歷</h3>
+            </div>
+            <p class="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-16 text-sm leading-relaxed">
+                從硬體維護起步，歷經客服駐點、專案管理，最終於企業集團擔負 IT 基礎建設全責。
+            </p>
+
+            <div class="relative max-w-3xl mx-auto">
+                <!-- Timeline Line -->
+                <div
+                    class="absolute left-6 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 via-primary-400 to-primary-600 dark:from-gray-700 dark:via-primary-600 dark:to-primary-400">
+                </div>
+
+                <!-- ============================================ -->
+                <!-- Timeline Item 1: 現在 - 劍麟股份有限公司 -->
+                <!-- ============================================ -->
+                <div class="relative pl-16 md:pl-20 pb-14 group">
+                    <!-- Dot (active, pulsing) -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span class="flex h-5 w-5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                            <span
+                                class="relative inline-flex rounded-full h-5 w-5 bg-primary-600 border-4 border-white dark:border-gray-900"></span>
+                        </span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-primary-600 text-white text-xs font-bold tracking-wider">2020/11
+                        — NOW</span>
+                    <!-- Card -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow-lg border border-primary-200 dark:border-primary-700/50 transition-all duration-300 hover:shadow-xl hover:border-primary-400 dark:hover:border-primary-500">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">劍麟股份有限公司</h4>
+                                <p class="text-primary-600 dark:text-primary-400 font-semibold">MIS 工程師</p>
+                            </div>
+                            <span
+                                class="mt-2 sm:mt-0 inline-flex items-center px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-semibold">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                現職
+                            </span>
+                        </div>
+                        <ul class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4 list-none space-y-1.5">
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>負責集團<strong
+                                    class="text-gray-900 dark:text-white">網路架構與資安管理</strong> (Azure, FortiGate, Aruba)
+                            </li>
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>協助 <strong
+                                    class="text-gray-900 dark:text-white">SAP (MM模組)</strong> 上線導入專案</li>
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>主導 <strong
+                                    class="text-gray-900 dark:text-white">TISAX</strong> (汽車資訊安全認證) 導入並通過稽核</li>
+                            <li class="flex items-start"><span class="text-primary-500 mr-2 mt-0.5">▸</span>解決集團
+                                Office365 與資訊採購專案</li>
+                        </ul>
+                        <!-- Project Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 text-xs font-bold border border-blue-200 dark:border-blue-800/50">☁️
+                                Azure</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800/50">🔒
+                                TISAX</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-300 text-xs font-bold border border-violet-200 dark:border-violet-800/50">📦
+                                SAP MM</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 text-xs font-bold border border-orange-200 dark:border-orange-800/50">🛡️
+                                FortiGate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================================================================= -->
+                <!-- Timeline Item 2: 2011-2020 - 英福達股份有限公司 -->
+                <!-- ================================================================= -->
+                <div class="relative pl-16 md:pl-20 pb-14 group">
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span
+                            class="relative inline-flex rounded-full h-5 w-5 bg-primary-500 border-4 border-white dark:border-gray-900"></span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white text-xs font-bold tracking-wider">2011/06
+                        — 2020/11</span>
+                    <!-- Card with accent for long tenure -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-xl relative overflow-hidden">
+                        <!-- Accent Ribbon -->
+                        <div
+                            class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-400 text-white text-xs font-bold px-4 py-1 rounded-bl-lg shadow-md">
+                            🏆 9 年深耕
+                        </div>
+                        <div class="mb-3">
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">英福達股份有限公司</h4>
+                            <p class="text-primary-600 dark:text-primary-400 font-semibold">歷任客服工程師 至 專案經理</p>
+                        </div>
+
+                        <!-- Sub-timeline: PM period -->
+                        <div class="mb-4 pl-4 border-l-2 border-amber-400 dark:border-amber-500">
+                            <p class="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1">專案經理時期 (2016-2020)</p>
+                            <ul class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed list-none space-y-1">
+                                <li class="flex items-start"><span
+                                        class="text-primary-500 mr-2 mt-0.5">▸</span>負責<strong
+                                        class="text-gray-900 dark:text-white">專案規劃、時程控管與風險管理</strong></li>
+                                <li class="flex items-start"><span
+                                        class="text-primary-500 mr-2 mt-0.5">▸</span>核心客戶：總統府、氣象局、高鐵局、國史館</li>
+                            </ul>
+                        </div>
+                        <!-- Sub-timeline: CS period -->
+                        <div class="mb-4 pl-4 border-l-2 border-gray-300 dark:border-gray-600">
+                            <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-1">客服工程師時期 (2011-2016)</p>
+                            <ul class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed list-none space-y-1">
+                                <li class="flex items-start"><span
+                                        class="text-primary-500 mr-2 mt-0.5">▸</span>派駐<strong
+                                        class="text-gray-900 dark:text-white">總統府</strong>擔任公文系統駐點維護</li>
+                                <li class="flex items-start"><span
+                                        class="text-primary-500 mr-2 mt-0.5">▸</span>負責產品測試與售後技術服務</li>
+                            </ul>
+                        </div>
+                        <!-- Project Tags -->
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 text-xs font-bold border border-red-200 dark:border-red-800/50">🏛️
+                                總統府</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 text-xs font-bold border border-sky-200 dark:border-sky-800/50">🌤️
+                                氣象局</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800/50">🚄
+                                高鐵局</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-xs font-bold border border-amber-200 dark:border-amber-800/50">📖
+                                國史館</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================= -->
+                <!-- Timeline Item 3: 2010-2011 - 三商電腦 -->
+                <!-- ============================================= -->
+                <div class="relative pl-16 md:pl-20 group">
+                    <!-- Dot -->
+                    <div class="absolute left-6 md:left-8 top-1 transform -translate-x-1/2 z-10">
+                        <span
+                            class="relative inline-flex rounded-full h-4 w-4 bg-gray-300 dark:bg-gray-600 border-4 border-white dark:border-gray-900"></span>
+                    </div>
+                    <!-- Year Badge -->
+                    <span
+                        class="inline-block px-3 py-0.5 mb-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white text-xs font-bold tracking-wider">2010/10
+                        — 2011/05</span>
+                    <!-- Card with 起點 callout -->
+                    <div
+                        class="bg-white dark:bg-gray-800/80 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:shadow-lg relative">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 dark:text-white">三商電腦</h4>
+                                <p class="text-primary-600 dark:text-primary-400 font-semibold">硬體維護工程師</p>
+                            </div>
+                            <span
+                                class="mt-2 sm:mt-0 inline-flex items-center px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-xs font-semibold">
+                                🚀 職涯起點
+                            </span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                            參與<strong
+                                class="text-gray-900 dark:text-white">台北國際花卉博覽會</strong>專案，負責自動收費系統維運與票務問題排除。這段經歷奠定了現場問題解決與硬體維運的紮實基礎。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">🌺
+                                花博專案</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">硬體維護</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold">票務系統</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-6">
+                <p class="text-primary-600 dark:text-primary-400 font-mono text-sm tracking-widest uppercase mb-2">
+                    Skills & Certifications</p>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">技能與證照</h3>
+            </div>
+            <p class="text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-16 text-sm">
+                15 年以上的實戰累積，涵蓋網路架構、專案管理到跨部門溝通協作。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+                <!-- Category 1: 網路管理 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">網路管理</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">Network Management</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">TCP/IP &
+                                    VPN</span><span class="text-xs text-gray-500 dark:text-gray-400">90%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">Fortinet /
+                                    Firewall</span><span class="text-xs text-gray-500 dark:text-gray-400">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="88"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">Azure</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">Windows
+                                    Server</span><span class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-primary-500 to-primary-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2: 專案管理 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">專案管理</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">Project Management</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">專案規劃 (PMP
+                                    概念)</span><span class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">時程控管</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">85%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="85"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">風險管理</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">80%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="80"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">MS SQL</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">75%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full"
+                                    data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3: 溝通協作 -->
+                <div
+                    class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-5">
+                        <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-1">溝通協作</h4>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mb-5">Communication & Collaboration</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">跨部門溝通</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">95%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="95"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">問題解決</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">90%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">客戶服務</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">90%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span
+                                    class="text-sm font-semibold text-gray-700 dark:text-gray-300">教育訓練</span><span
+                                    class="text-xs text-gray-500 dark:text-gray-400">80%</span></div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="skill-bar bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full"
+                                    data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Certification Badge -->
+            <div class="mt-12 text-center">
+                <div
+                    class="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-md">
+                    <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                        </path>
+                    </svg>
+                    <div class="text-left">
+                        <p class="text-sm font-bold text-gray-900 dark:text-white">丙級工業電子技術士</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">國家技術士證照</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h4 class="text-2xl font-bold mb-6">保持聯繫</h4>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Email</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Back to Home</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> CFLEE. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
